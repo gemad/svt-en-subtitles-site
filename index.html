@@ -57,9 +57,7 @@
       </a>
       <nav>
         <ul class="nav-links" id="navLinks">
-          <li><a href="#features">Features</a></li>
           <li><a href="#demo">Demo</a></li>
-          <li><a href="#how-it-works">How It Works</a></li>
           <li><a href="#installation">Install</a></li>
           <li><a href="privacy.html">Privacy</a></li>
           <li><a href="#contact">Contact</a></li>
@@ -153,84 +151,6 @@
     </div>
   </section>
 
-  <!-- Features Section -->
-  <section id="features">
-    <div class="container">
-      <div class="section-header reveal">
-        <div class="section-tag">Core Features</div>
-        <h2>Built for Privacy, Designed for Speed</h2>
-        <p>Everything runs inside your browser. No servers, no subscriptions, no tracking.</p>
-      </div>
-
-      <div class="features-grid">
-        <!-- Feature 1 -->
-        <div class="feature-card reveal">
-          <div class="feature-icon-wrap">
-            <div class="feature-icon">🧠</div>
-          </div>
-          <h3>Local AI Engine</h3>
-          <p>Powered by Transformers.js & Helsinki-NLP Opus-MT. The full translation model runs inside your browser via
-            WebAssembly — your content never leaves your device.</p>
-          <div class="feature-tag">On-Device</div>
-        </div>
-
-        <!-- Feature 2 -->
-        <div class="feature-card reveal">
-          <div class="feature-icon-wrap">
-            <div class="feature-icon">⚡</div>
-          </div>
-          <h3>Near-Zero Latency</h3>
-          <p>By intercepting native VTT subtitle files directly from SVT's stream, translations arrive synchronized with
-            the audio. No round-trip to external servers.</p>
-          <div class="feature-tag">Real-Time</div>
-        </div>
-
-        <!-- Feature 3 -->
-        <div class="feature-card reveal">
-          <div class="feature-icon-wrap">
-            <div class="feature-icon">🖱️</div>
-          </div>
-          <h3>Draggable Overlay</h3>
-          <p>Click and drag the translation box anywhere on screen. Your position is remembered across sessions. Works
-            seamlessly in fullscreen mode too.</p>
-          <div class="feature-tag">Flexible UI</div>
-        </div>
-
-        <!-- Feature 4 -->
-        <div class="feature-card reveal">
-          <div class="feature-icon-wrap">
-            <div class="feature-icon">🛡️</div>
-          </div>
-          <h3>Zero Data Collection</h3>
-          <p>No analytics, no telemetry, no cookies, no external API calls for translation. Only your local browser
-            storage is used for settings and model cache.</p>
-          <div class="feature-tag">Privacy-First</div>
-        </div>
-
-        <!-- Feature 5 -->
-        <div class="feature-card reveal">
-          <div class="feature-icon-wrap">
-            <div class="feature-icon">📺</div>
-          </div>
-          <h3>Fullscreen Support</h3>
-          <p>The translation overlay stays pinned when you go fullscreen. It tracks DOM container changes and maintains
-            readability at any viewport scale.</p>
-          <div class="feature-tag">Immersive</div>
-        </div>
-
-        <!-- Feature 6 -->
-        <div class="feature-card reveal">
-          <div class="feature-icon-wrap">
-            <div class="feature-icon">⚙️</div>
-          </div>
-          <h3>Fully Customizable</h3>
-          <p>Adjust font sizes for both Swedish and English text, swap subtitle order, choose stacked or side-by-side
-            layout — all from the clean popup UI.</p>
-          <div class="feature-tag">Your Way</div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Interactive Demo Section -->
   <section id="demo" class="demo-section">
@@ -310,78 +230,6 @@
     </div>
   </section>
 
-  <!-- How It Works / Architecture -->
-  <section id="how-it-works" class="architecture-section">
-    <div class="container">
-      <div class="section-header reveal">
-        <div class="section-tag">Architecture</div>
-        <h2>How It Works Under the Hood</h2>
-        <p>A Manifest V3 extension with an offscreen document for heavy AI workloads.</p>
-      </div>
-
-      <div class="arch-flow reveal">
-        <!-- Step 1 -->
-        <div class="arch-node">
-          <div class="arch-node-icon">📡</div>
-          <div class="arch-node-content">
-            <h4>VTT Interception</h4>
-            <p>Background service worker intercepts raw .vtt subtitle files from SVT's CDN streams</p>
-          </div>
-          <div class="arch-node-label">background.js</div>
-        </div>
-
-        <div class="arch-connector">
-          <div class="arch-connector-line"></div>
-          <div class="arch-connector-arrow">→</div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="arch-node arch-node-accent">
-          <div class="arch-node-icon">🧠</div>
-          <div class="arch-node-content">
-            <h4>AI Translation</h4>
-            <p>Offscreen document runs Opus-MT model via ONNX Runtime WebAssembly — fully local inference</p>
-          </div>
-          <div class="arch-node-label">offscreen.js</div>
-        </div>
-
-        <div class="arch-connector">
-          <div class="arch-connector-line"></div>
-          <div class="arch-connector-arrow">→</div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="arch-node">
-          <div class="arch-node-icon">🖥️</div>
-          <div class="arch-node-content">
-            <h4>Live Overlay</h4>
-            <p>Content script renders a draggable subtitle overlay with Swedish + English text on the page</p>
-          </div>
-          <div class="arch-node-label">content.js</div>
-        </div>
-      </div>
-
-      <!-- Tech Stack Pills -->
-      <div class="tech-stack reveal">
-        <div class="tech-pill">
-          <strong>Runtime</strong>
-          <span>ONNX WASM</span>
-        </div>
-        <div class="tech-pill">
-          <strong>Engine</strong>
-          <span>Transformers.js</span>
-        </div>
-        <div class="tech-pill">
-          <strong>Model</strong>
-          <span>Opus-MT sv→en</span>
-        </div>
-        <div class="tech-pill">
-          <strong>Platform</strong>
-          <span>Chrome MV3</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- Installation Section -->
   <section id="installation">
@@ -559,19 +407,6 @@
           <h4>No Data Collection</h4>
           <p>This extension does not collect, store, transmit, or sell any personal data, browsing history, or viewing
             habits. Period.</p>
-        </div>
-        <div class="privacy-card">
-          <div class="privacy-icon">💾</div>
-          <h4>Local Storage Only</h4>
-          <p>User preferences (font sizes, layout mode, enabled state) are stored exclusively in
-            <code>chrome.storage.local</code> on your device.
-          </p>
-        </div>
-        <div class="privacy-card">
-          <div class="privacy-icon">🌐</div>
-          <h4>Network Requests</h4>
-          <p>The only external requests are: (1) a one-time model download from Hugging Face on first use, and (2)
-            fetching VTT subtitle files from SVT's own servers. No other network activity.</p>
         </div>
         <div class="privacy-card">
           <div class="privacy-icon">🚫</div>
