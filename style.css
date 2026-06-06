@@ -226,6 +226,22 @@ header.scrolled {
 .btn-nav svg { transition: fill 0.25s; }
 .btn-nav:hover svg { fill: #040810; }
 
+.btn-nav-coffee {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgba(255, 221, 0, 0.1);
+  color: #FFDD00 !important;
+  border: 1px solid rgba(255, 221, 0, 0.3);
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  font-size: 0.95rem !important;
+  text-decoration: none;
+  transition: all 0.25s var(--ease);
+}
+.btn-nav-coffee:hover {
+  background: #FFDD00;
+  box-shadow: 0 0 15px rgba(255, 221, 0, 0.4);
+}
+
 /* Mobile Menu */
 .mobile-menu-btn {
   display: none; flex-direction: column; gap: 5px; background: none;
@@ -732,6 +748,17 @@ header.scrolled {
 .cta-block h2 { font-size: 2.4rem; margin-bottom: 16px; }
 .cta-block p { color: var(--text-secondary); max-width: 480px; margin: 0 auto 32px; }
 .cta-buttons { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+.btn-nav-coffee { background: #ffdd00; color: #000; }
+
+
+/* ============================================
+   CONTACT & SUPPORT SECTION
+   ============================================ */
+.donate-section, .contact-section {
+  padding: 80px 0;
+  border-top: 1px solid var(--border);
+  background: var(--bg-primary);
+}
 
 
 /* ============================================
@@ -822,4 +849,107 @@ footer {
   .btn { padding: 12px 22px; font-size: 0.9rem; }
   .cta-block { padding: 50px 24px; }
   .cta-block h2 { font-size: 1.8rem; }
+}
+
+/* ============================================
+   CONTACT & SUPPORT SECTION
+   ============================================ */
+.donate-section, .contact-section {
+  padding: 80px 0;
+  border-top: 1px solid var(--border);
+  background: var(--bg-primary);
+}
+
+.contact-card, .coffee-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.coffee-card {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.support-header {
+  margin-bottom: 24px;
+}
+
+.support-header h3 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.support-header p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.form-control {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(0, 255, 136, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.btn-coffee {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #FFDD00;
+  color: #000;
+  padding: 14px 28px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 4px 15px rgba(255, 221, 0, 0.2);
+  margin-top: 20px;
+}
+
+.btn-coffee:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 221, 0, 0.3);
+  background: #FFEA4D;
 }
