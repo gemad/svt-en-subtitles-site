@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>SVT Play English Subtitles – Real-Time AI Translation</title>
+  <meta name="description" content="A privacy-first, on-device AI Chrome extension that translates Swedish subtitles to English in real time on SVT Play. No cloud APIs, 100% local.">
+  <meta name="keywords" content="SVT Play, Swedish subtitles, English translation, Chrome extension, on-device AI, privacy, Transformers.js, ONNX, WASM">
+  <meta name="author" content="gemad">
+  <meta name="theme-color" content="#0b0f19">
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content="SVT Play – English Subtitles">
+  <meta property="og:description" content="Real-time AI-powered Swedish to English subtitle translation for SVT Play. Runs entirely on your device.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="banner.png">
+  
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/icon-32.png">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Animated Background Canvas -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Header Navigation -->
+  <header id="mainHeader">
+    <div class="container nav-wrapper">
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="8" fill="url(#logoGrad)"/>
+            <text x="14" y="19" text-anchor="middle" font-size="15" fill="#0b0f19" font-weight="800">EN</text>
+            <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="28" y2="28"><stop stop-color="#00ff88"/><stop offset="1" stop-color="#00cc6a"/></linearGradient></defs>
+          </svg>
+        </div>
+        SVT <span>English</span>
+      </a>
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#demo">Demo</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#installation">Install</a></li>
+          <li><a href="#privacy">Privacy</a></li>
+          <li><a href="#installation" class="btn-nav">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1a1 1 0 011 1v9.586l2.293-2.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 11.586V2a1 1 0 011-1z"/><path d="M3 15a1 1 0 011 1v1h12v-1a1 1 0 112 0v1a2 2 0 01-2 2H4a2 2 0 01-2-2v-1a1 1 0 011-1z"/></svg>
+            Get Extension
+          </a></li>
+        </ul>
+      </nav>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="container">
+      <div class="reveal">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Privacy-First & On-Device AI
+        </div>
+      </div>
+      
+      <h1 class="reveal">
+        Real-Time Swedish to English<br>
+        Subtitles for <span class="gradient-text">SVT Play</span>
+      </h1>
+      
+      <p class="hero-subtitle reveal">
+        A Chrome extension that uses local machine learning to translate 
+        Swedish subtitles instantly — no cloud APIs, no data collection, 
+        100% private.
+      </p>
+      
+      <div class="hero-ctas reveal">
+        <a href="#installation" class="btn btn-primary" id="downloadBtn">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1a1 1 0 011 1v9.586l2.293-2.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 11.586V2a1 1 0 011-1z"/><path d="M3 15a1 1 0 011 1v1h12v-1a1 1 0 112 0v1a2 2 0 01-2 2H4a2 2 0 01-2-2v-1a1 1 0 011-1z"/></svg>
+          Download Extension
+        </a>
+        <a href="#demo" class="btn btn-secondary">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>
+          See How It Works
+        </a>
+      </div>
+
+      <!-- Stats Row -->
+      <div class="hero-stats reveal">
+        <div class="stat-item">
+          <div class="stat-number" data-target="0">0</div>
+          <div class="stat-label">Cloud APIs Used</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">On-Device Processing</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-number">&lt;2s</div>
+          <div class="stat-label">Translation Latency</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <div class="stat-number">Free</div>
+          <div class="stat-label">To Use</div>
+        </div>
+      </div>
+
+      <!-- Hero Screenshot / Banner -->
+      <div class="hero-media reveal">
+        <div class="hero-media-glow"></div>
+        <img src="banner.png" alt="SVT Play English Subtitles extension in action showing Swedish to English translation overlay" id="hero-banner" loading="eager">
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Core Features</div>
+        <h2>Built for Privacy, Designed for Speed</h2>
+        <p>Everything runs inside your browser. No servers, no subscriptions, no tracking.</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card reveal">
+          <div class="feature-icon-wrap">
+            <div class="feature-icon">🧠</div>
+          </div>
+          <h3>Local AI Engine</h3>
+          <p>Powered by Transformers.js & Helsinki-NLP Opus-MT. The full translation model runs inside your browser via WebAssembly — your content never leaves your device.</p>
+          <div class="feature-tag">On-Device</div>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card reveal">
+          <div class="feature-icon-wrap">
+            <div class="feature-icon">⚡</div>
+          </div>
+          <h3>Near-Zero Latency</h3>
+          <p>By intercepting native VTT subtitle files directly from SVT's stream, translations arrive synchronized with the audio. No round-trip to external servers.</p>
+          <div class="feature-tag">Real-Time</div>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card reveal">
+          <div class="feature-icon-wrap">
+            <div class="feature-icon">🖱️</div>
+          </div>
+          <h3>Draggable Overlay</h3>
+          <p>Click and drag the translation box anywhere on screen. Your position is remembered across sessions. Works seamlessly in fullscreen mode too.</p>
+          <div class="feature-tag">Flexible UI</div>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card reveal">
+          <div class="feature-icon-wrap">
+            <div class="feature-icon">🛡️</div>
+          </div>
+          <h3>Zero Data Collection</h3>
+          <p>No analytics, no telemetry, no cookies, no external API calls for translation. Only your local browser storage is used for settings and model cache.</p>
+          <div class="feature-tag">Privacy-First</div>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card reveal">
+          <div class="feature-icon-wrap">
+            <div class="feature-icon">📺</div>
+          </div>
+          <h3>Fullscreen Support</h3>
+          <p>The translation overlay stays pinned when you go fullscreen. It tracks DOM container changes and maintains readability at any viewport scale.</p>
+          <div class="feature-tag">Immersive</div>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card reveal">
+          <div class="feature-icon-wrap">
+            <div class="feature-icon">⚙️</div>
+          </div>
+          <h3>Fully Customizable</h3>
+          <p>Adjust font sizes for both Swedish and English text, swap subtitle order, choose stacked or side-by-side layout — all from the clean popup UI.</p>
+          <div class="feature-tag">Your Way</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Demo Section -->
+  <section id="demo" class="demo-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Live Preview</div>
+        <h2>See It in Action</h2>
+        <p>Interactive simulation of how subtitles appear while watching SVT Play.</p>
+      </div>
+
+      <div class="demo-wrapper reveal">
+        <!-- Browser Chrome -->
+        <div class="browser-chrome">
+          <div class="browser-dots">
+            <span class="dot red"></span>
+            <span class="dot yellow"></span>
+            <span class="dot green"></span>
+          </div>
+          <div class="browser-url">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="#64748b"><path d="M6 0a6 6 0 100 12A6 6 0 006 0zm.5 1.07A4.97 4.97 0 0110.95 5.5H8.43c-.08-1.4-.4-2.7-.93-3.7.32.08.64.18.95.3zm-.5-.07c-.7.84-1.26 2.2-1.4 3.5h2.8C7.26 3.2 6.7 1.84 6 1zm-4.95 4.5h2.52c.08-1.4.4-2.7.93-3.7-.32.08-.64.18-.95.3A4.97 4.97 0 001.05 5.5zM6 11c.7-.84 1.26-2.2 1.4-3.5H4.6c.14 1.3.7 2.66 1.4 3.5z"/></svg>
+            <span>svtplay.se/video/rapport — Season 2026</span>
+          </div>
+          <div class="browser-controls">
+            <button class="demo-layout-btn" id="demoLayoutBtn">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor"><path d="M1 2a1 1 0 011-1h10a1 1 0 011 1v10a1 1 0 01-1 1H2a1 1 0 01-1-1V2zm1 0v10h10V2H2z"/><path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+              Stacked
+            </button>
+          </div>
+        </div>
+
+        <!-- Video Area -->
+        <div class="demo-screen">
+          <div class="demo-video-bg"></div>
+          
+          <!-- Simulated native Swedish sub -->
+          <div class="demo-native-sub" id="demoNativeSub">
+            Välkomna till kvällens sändning av Rapport.
+          </div>
+
+          <!-- Translation overlay -->
+          <div class="demo-overlay" id="demoOverlay">
+            <div class="demo-overlay-indicator">
+              <span class="demo-indicator-dot"></span>
+              SVT EN: Active
+            </div>
+            <div class="demo-overlay-sv" id="demoOverlaySv">Välkomna till kvällens sändning av Rapport.</div>
+            <div class="demo-overlay-en" id="demoOverlayEn">Welcome to tonight's broadcast of Rapport.</div>
+          </div>
+
+          <!-- Video Controls -->
+          <div class="demo-controls">
+            <div class="demo-ctrl-left">
+              <button class="demo-ctrl-btn" aria-label="Play">▶</button>
+              <span class="demo-time">12:34 / 28:00</span>
+            </div>
+            <div class="demo-progress">
+              <div class="demo-progress-track">
+                <div class="demo-progress-fill" id="demoProgressFill"></div>
+                <div class="demo-progress-handle" id="demoProgressHandle"></div>
+              </div>
+            </div>
+            <div class="demo-ctrl-right">
+              <div class="demo-en-badge">
+                <span class="demo-en-dot"></span>
+                🇬🇧 EN: ON
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works / Architecture -->
+  <section id="how-it-works" class="architecture-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Architecture</div>
+        <h2>How It Works Under the Hood</h2>
+        <p>A Manifest V3 extension with an offscreen document for heavy AI workloads.</p>
+      </div>
+
+      <div class="arch-flow reveal">
+        <!-- Step 1 -->
+        <div class="arch-node">
+          <div class="arch-node-icon">📡</div>
+          <div class="arch-node-content">
+            <h4>VTT Interception</h4>
+            <p>Background service worker intercepts raw .vtt subtitle files from SVT's CDN streams</p>
+          </div>
+          <div class="arch-node-label">background.js</div>
+        </div>
+
+        <div class="arch-connector">
+          <div class="arch-connector-line"></div>
+          <div class="arch-connector-arrow">→</div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="arch-node arch-node-accent">
+          <div class="arch-node-icon">🧠</div>
+          <div class="arch-node-content">
+            <h4>AI Translation</h4>
+            <p>Offscreen document runs Opus-MT model via ONNX Runtime WebAssembly — fully local inference</p>
+          </div>
+          <div class="arch-node-label">offscreen.js</div>
+        </div>
+
+        <div class="arch-connector">
+          <div class="arch-connector-line"></div>
+          <div class="arch-connector-arrow">→</div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="arch-node">
+          <div class="arch-node-icon">🖥️</div>
+          <div class="arch-node-content">
+            <h4>Live Overlay</h4>
+            <p>Content script renders a draggable subtitle overlay with Swedish + English text on the page</p>
+          </div>
+          <div class="arch-node-label">content.js</div>
+        </div>
+      </div>
+
+      <!-- Tech Stack Pills -->
+      <div class="tech-stack reveal">
+        <div class="tech-pill">
+          <strong>Runtime</strong>
+          <span>ONNX WASM</span>
+        </div>
+        <div class="tech-pill">
+          <strong>Engine</strong>
+          <span>Transformers.js</span>
+        </div>
+        <div class="tech-pill">
+          <strong>Model</strong>
+          <span>Opus-MT sv→en</span>
+        </div>
+        <div class="tech-pill">
+          <strong>Platform</strong>
+          <span>Chrome MV3</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Installation Section -->
+  <section id="installation">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Get Started</div>
+        <h2>Install in 4 Easy Steps</h2>
+        <p>Manual installation while Chrome Web Store listing is under review.</p>
+      </div>
+
+      <!-- Direct Download Button -->
+      <div style="text-align: center; margin-bottom: 48px;" class="reveal">
+        <a href="#download-link" class="btn btn-primary" id="mainDownloadBtn" style="font-size: 1.05rem; padding: 16px 36px;">
+          <svg width="22" height="22" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1a1 1 0 011 1v9.586l2.293-2.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 11.586V2a1 1 0 011-1z"/><path d="M3 15a1 1 0 011 1v1h12v-1a1 1 0 112 0v1a2 2 0 01-2 2H4a2 2 0 01-2-2v-1a1 1 0 011-1z"/></svg>
+          Download SVT EN Subtitles v3.1.0 (.zip)
+        </a>
+        <p style="color: #556580; font-size: 0.8rem; margin-top: 12px;">~19 MB · Chrome / Edge / Brave · No account required</p>
+      </div>
+
+      <div class="steps-timeline reveal">
+        <div class="step-card">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h3>Download</h3>
+            <p>Click the download button above to get the latest <code>.zip</code> extension package.</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h3>Extract</h3>
+            <p>Unzip the archive to a permanent folder on your computer.</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h3>Developer Mode</h3>
+            <p>Open <code>chrome://extensions</code> and enable <strong>"Developer mode"</strong> in the top right.</p>
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <h3>Load Extension</h3>
+            <p>Click <strong>"Load unpacked"</strong>, select the extracted folder, and you're ready to watch!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq" class="faq-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">FAQ</div>
+        <h2>Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq-list reveal">
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Why does the first run take a few minutes?
+            <span class="faq-chevron">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <p>On first launch, the extension downloads a ~150MB Opus-MT translation model from Hugging Face's CDN. This is a one-time download — the model is cached in your browser's Cache Storage, so subsequent launches are instantaneous.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            How does on-device translation protect my privacy?
+            <span class="faq-chevron">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <p>Traditional translators send your text to cloud APIs (Google Translate, DeepL, etc.). This extension runs neural inference entirely in your browser via WebAssembly. No subtitle text, no viewing habits, and no personal data ever leaves your device.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            What customization options are available?
+            <span class="faq-chevron">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <p>The popup UI lets you adjust Swedish and English font sizes independently, swap the text order (Swedish/English vs English/Swedish), toggle between stacked and side-by-side layouts, and reset the overlay position. All preferences persist across sessions.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Does it work with all SVT Play content?
+            <span class="faq-chevron">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes — the extension intercepts VTT subtitle streams and also has a DOM scraper fallback. It works with news programs, dramas, documentaries, and live broadcasts on svtplay.se, as long as Swedish subtitles are available for the content.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question" aria-expanded="false">
+            Is it free to use?
+            <span class="faq-chevron">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>
+            </span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes — SVT Play English Subtitles is currently free to download and use. The AI translation model is provided by Helsinki-NLP's Opus-MT project.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy Section -->
+  <section id="privacy" class="privacy-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Privacy Policy</div>
+        <h2>Your Data Stays With You</h2>
+        <p>This extension was built with a strict privacy-first philosophy.</p>
+      </div>
+
+      <div class="privacy-grid reveal">
+        <div class="privacy-card">
+          <div class="privacy-icon">🔒</div>
+          <h4>No Data Collection</h4>
+          <p>This extension does not collect, store, transmit, or sell any personal data, browsing history, or viewing habits. Period.</p>
+        </div>
+        <div class="privacy-card">
+          <div class="privacy-icon">💾</div>
+          <h4>Local Storage Only</h4>
+          <p>User preferences (font sizes, layout mode, enabled state) are stored exclusively in <code>chrome.storage.local</code> on your device.</p>
+        </div>
+        <div class="privacy-card">
+          <div class="privacy-icon">🌐</div>
+          <h4>Network Requests</h4>
+          <p>The only external requests are: (1) a one-time model download from Hugging Face on first use, and (2) fetching VTT subtitle files from SVT's own servers. No other network activity.</p>
+        </div>
+        <div class="privacy-card">
+          <div class="privacy-icon">🚫</div>
+          <h4>No Third-Party Services</h4>
+          <p>No analytics (Google Analytics, Mixpanel, etc.), no crash reporting, no ad networks, no tracking pixels. The extension has zero dependencies on external services for translation.</p>
+        </div>
+      </div>
+
+      <div class="privacy-footer reveal">
+        <p>This privacy policy applies to version 3.1.0 and later of the SVT Play – English Subtitles Chrome extension. For questions, contact us at <a href="mailto:support@svtensubtitles.com">support@svtensubtitles.com</a>.</p>
+        <p class="privacy-updated">Last updated: June 2026</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-block reveal">
+        <div class="cta-glow"></div>
+        <h2>Start Watching SVT Play<br>in <span class="gradient-text">English</span></h2>
+        <p>Download the extension and enjoy Sweden's premium programs with real-time, local AI subtitles.</p>
+        <div class="cta-buttons">
+          <a href="#installation" class="btn btn-primary">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1a1 1 0 011 1v9.586l2.293-2.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 111.414-1.414L9 11.586V2a1 1 0 011-1z"/><path d="M3 15a1 1 0 011 1v1h12v-1a1 1 0 112 0v1a2 2 0 01-2 2H4a2 2 0 01-2-2v-1a1 1 0 011-1z"/></svg>
+            Download Extension
+          </a>
+          <a href="#features" class="btn btn-ghost">
+            Learn More
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Attribution & Footer -->
+  <footer>
+    <div class="container footer-wrapper">
+      <div class="footer-left">
+        <a href="#" class="footer-logo">
+          <svg width="20" height="20" viewBox="0 0 28 28" fill="none">
+            <rect width="28" height="28" rx="8" fill="url(#fLogoGrad)"/>
+            <text x="14" y="19" text-anchor="middle" font-size="15" fill="#0b0f19" font-weight="800">EN</text>
+            <defs><linearGradient id="fLogoGrad" x1="0" y1="0" x2="28" y2="28"><stop stop-color="#00ff88"/><stop offset="1" stop-color="#00cc6a"/></linearGradient></defs>
+          </svg>
+          SVT English
+        </a>
+        <p>&copy; 2026 SVT Play English Subtitles. All rights reserved.</p>
+      </div>
+      <div class="footer-center">
+        <p class="attribution">
+          Translation models by <a href="https://opus.nlpl.eu/" target="_blank" rel="noopener">Helsinki-NLP (Opus-MT)</a>
+          &nbsp;·&nbsp;
+          Engine by <a href="https://huggingface.co/docs/transformers.js" target="_blank" rel="noopener">Transformers.js</a>
+          &nbsp;·&nbsp;
+          Runtime by <a href="https://onnxruntime.ai/" target="_blank" rel="noopener">ONNX Runtime</a>
+        </p>
+      </div>
+      <div class="footer-right">
+        <a href="#privacy">Privacy</a>
+        &nbsp;&nbsp;
+        <a href="mailto:support@svtensubtitles.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // =============================================
+    // PARTICLE CANVAS BACKGROUND
+    // =============================================
+    const canvas = document.getElementById('particleCanvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let mouse = { x: undefined, y: undefined };
+    let animFrame;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    document.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2 + 0.5;
+        this.speedX = (Math.random() - 0.5) * 0.4;
+        this.speedY = (Math.random() - 0.5) * 0.4;
+        this.opacity = Math.random() * 0.5 + 0.1;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        // Mouse interaction
+        if (mouse.x !== undefined) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 120) {
+            this.x -= dx * 0.01;
+            this.y -= dy * 0.01;
+            this.opacity = Math.min(this.opacity + 0.02, 0.8);
+          }
+        }
+
+        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+          this.reset();
+        }
+      }
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0, 255, 136, ${this.opacity})`;
+        ctx.fill();
+      }
+    }
+
+    function initParticles() {
+      const count = Math.min(Math.floor((canvas.width * canvas.height) / 12000), 120);
+      particles = [];
+      for (let i = 0; i < count; i++) {
+        particles.push(new Particle());
+      }
+    }
+    initParticles();
+
+    function connectParticles() {
+      for (let a = 0; a < particles.length; a++) {
+        for (let b = a + 1; b < particles.length; b++) {
+          const dx = particles[a].x - particles[b].x;
+          const dy = particles[a].y - particles[b].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 150) {
+            const opacity = (1 - dist / 150) * 0.15;
+            ctx.strokeStyle = `rgba(0, 255, 136, ${opacity})`;
+            ctx.lineWidth = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(particles[a].x, particles[a].y);
+            ctx.lineTo(particles[b].x, particles[b].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      connectParticles();
+      animFrame = requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    // Pause canvas when not visible
+    const heroObserver = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        if (!animFrame) animateParticles();
+      } else {
+        cancelAnimationFrame(animFrame);
+        animFrame = null;
+      }
+    }, { threshold: 0.1 });
+    heroObserver.observe(document.getElementById('hero'));
+
+
+    // =============================================
+    // SCROLL REVEAL ANIMATIONS
+    // =============================================
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+
+    // =============================================
+    // HEADER SCROLL EFFECT
+    // =============================================
+    const header = document.getElementById('mainHeader');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      header.classList.toggle('scrolled', scrollY > 50);
+      lastScroll = scrollY;
+    }, { passive: true });
+
+
+    // =============================================
+    // MOBILE MENU
+    // =============================================
+    const mobileBtn = document.getElementById('mobileMenuBtn');
+    const navLinks = document.getElementById('navLinks');
+    mobileBtn.addEventListener('click', () => {
+      mobileBtn.classList.toggle('active');
+      navLinks.classList.toggle('mobile-open');
+    });
+
+    // Close menu on link click
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileBtn.classList.remove('active');
+        navLinks.classList.remove('mobile-open');
+      });
+    });
+
+
+    // =============================================
+    // INTERACTIVE DEMO: SUBTITLE CYCLING
+    // =============================================
+    const demoSubtitles = [
+      { sv: "Välkomna till kvällens sändning av Rapport.", en: "Welcome to tonight's broadcast of Rapport." },
+      { sv: "Vi har en viktig rapport angående det nya klimatmålet.", en: "We have an important report regarding the new climate goal." },
+      { sv: "Förhandlingarna har pågått hela natten i Bryssel.", en: "The negotiations have been ongoing all night in Brussels." },
+      { sv: "Beslutet förväntas bli officiellt under eftermiddagen.", en: "The decision is expected to become official in the afternoon." },
+      { sv: "Tack för att ni tittar, vi ses imorgon.", en: "Thank you for watching, we'll see you tomorrow." },
+    ];
+
+    let demoIndex = 0;
+    const demoNative = document.getElementById('demoNativeSub');
+    const demoSv = document.getElementById('demoOverlaySv');
+    const demoEn = document.getElementById('demoOverlayEn');
+    const demoOverlay = document.getElementById('demoOverlay');
+    const demoProgress = document.getElementById('demoProgressFill');
+    const demoHandle = document.getElementById('demoProgressHandle');
+    let demoPercent = 44;
+
+    function cycleDemoSubtitle() {
+      // Fade out
+      demoNative.style.opacity = '0';
+      demoOverlay.style.opacity = '0';
+      demoOverlay.style.transform = 'translateX(-50%) translateY(5px)';
+
+      setTimeout(() => {
+        demoIndex = (demoIndex + 1) % demoSubtitles.length;
+        const sub = demoSubtitles[demoIndex];
+        demoNative.textContent = sub.sv;
+        demoSv.textContent = sub.sv;
+        demoEn.textContent = sub.en;
+
+        // Advance progress
+        demoPercent = Math.min(demoPercent + 6, 92);
+        demoProgress.style.width = demoPercent + '%';
+        demoHandle.style.left = demoPercent + '%';
+
+        // Fade in
+        demoNative.style.opacity = '1';
+        demoOverlay.style.opacity = '1';
+        demoOverlay.style.transform = 'translateX(-50%) translateY(0)';
+      }, 400);
+    }
+
+    setInterval(cycleDemoSubtitle, 4500);
+
+    // Demo layout toggle
+    const demoLayoutBtn = document.getElementById('demoLayoutBtn');
+    let demoLayout = 'stacked';
+    demoLayoutBtn.addEventListener('click', () => {
+      if (demoLayout === 'stacked') {
+        demoLayout = 'side';
+        demoOverlay.classList.add('side-by-side');
+        demoLayoutBtn.textContent = '⇄ Side-by-Side';
+      } else {
+        demoLayout = 'stacked';
+        demoOverlay.classList.remove('side-by-side');
+        demoLayoutBtn.textContent = '⇅ Stacked';
+      }
+    });
+
+
+    // =============================================
+    // FAQ ACCORDION
+    // =============================================
+    document.querySelectorAll('.faq-item').forEach(item => {
+      const btn = item.querySelector('.faq-question');
+      btn.addEventListener('click', () => {
+        const isOpen = item.classList.contains('open');
+        // Close all
+        document.querySelectorAll('.faq-item').forEach(i => {
+          i.classList.remove('open');
+          i.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          item.classList.add('open');
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+
+    // =============================================
+    // SMOOTH SCROLL FOR ANCHOR LINKS
+    // =============================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', (e) => {
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
+
+    // =============================================
+    // FEATURE CARD MOUSE GLOW
+    // =============================================
+    document.querySelectorAll('.feature-card').forEach(card => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+        card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+      });
+    });
+  </script>
+
+</body>
+</html>
