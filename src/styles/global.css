@@ -1,0 +1,128 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================
+   LOCAL AI TOOLS — Dark Green Theme
+   Mirrors the original SVT site palette
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@theme {
+  --font-*: initial;
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+
+  /* Dark gray scale (replaces the default light grays) */
+  --color-gray-50:  #f0f4f8;
+  --color-gray-100: #d1dce8;
+  --color-gray-200: #8b9cb8;
+  --color-gray-300: #556580;
+  --color-gray-400: #2a3550;
+  --color-gray-500: #1e2d44;
+  --color-gray-600: #141d30;
+  --color-gray-700: #0d1320;
+  --color-gray-800: #090e1a;
+  --color-gray-900: #060a13;
+  --color-gray-950: #040810;
+
+  /* Primary accent = #00ff88 green */
+  --color-primary-50:  oklch(96% 0.14 160);
+  --color-primary-100: oklch(92% 0.18 160);
+  --color-primary-200: oklch(85% 0.22 160);
+  --color-primary-300: oklch(78% 0.25 160);
+  --color-primary-400: oklch(71% 0.26 160);
+  --color-primary-500: #00ff88;
+  --color-primary-600: #00e87a;
+  --color-primary-700: #00cc6a;
+  --color-primary-800: #009e52;
+  --color-primary-900: #006e39;
+  --color-primary-950: #003d20;
+}
+
+/* ============================================================
+   Base — always dark
+   ============================================================ */
+
+html, html.dark {
+  color-scheme: dark;
+  background-color: #060a13;
+  color: #f0f4f8;
+}
+
+body {
+  background-color: #060a13;
+  color: #f0f4f8;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Force bg-white → our dark card color */
+.bg-white {
+  background-color: #0d1320 !important;
+}
+/* bg-gray-50 base mode → dark */
+.bg-gray-50 {
+  background-color: #090e1a !important;
+}
+
+/* ============================================================
+   Tag pill styles
+   ============================================================ */
+
+.tag {
+  @apply inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset;
+}
+
+.gray-tag {
+  @apply ring-gray-600;
+  background-color: #141d30;
+  color: #8b9cb8;
+}
+
+.green-tag {
+  background-color: rgba(0, 255, 136, 0.08);
+  color: #00ff88;
+  ring-color: rgba(0, 255, 136, 0.2);
+}
+
+.blue-tag {
+  @apply bg-blue-400/10 text-blue-400 ring-blue-400/30;
+}
+
+.indigo-tag {
+  @apply bg-indigo-400/10 text-indigo-400 ring-indigo-400/30;
+}
+
+.purple-tag {
+  @apply bg-purple-400/10 text-purple-400 ring-purple-400/30;
+}
+
+.highlight span {
+  @apply bg-gray-700 text-[#f0f4f8] px-1 -rotate-6;
+}
+
+.dashedcue span {
+  @apply underline underline-offset-4 decoration-[#00ff88] decoration-dashed;
+}
+
+/* ============================================================
+   Scrollbar
+   ============================================================ */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #060a13; }
+::-webkit-scrollbar-thumb { background: #141d30; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #2a3550; }
+
+/* ============================================================
+   Accent color overrides for Tailwind primary utilities
+   ============================================================ */
+.text-primary-500 { color: #00ff88 !important; }
+.text-primary-600 { color: #00e87a !important; }
+.text-primary-700 { color: #00cc6a !important; }
+.border-primary-500 { border-color: #00ff88 !important; }
+.bg-primary-600, .dark\:bg-primary-600 { background-color: #00ff88 !important; color: #040810 !important; }
+.bg-primary-700, .dark\:bg-primary-700 { background-color: #00e87a !important; color: #040810 !important; }
+.hover\:bg-primary-700:hover, .dark\:hover\:bg-primary-700:hover { background-color: #00cc6a !important; }

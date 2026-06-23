@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
-  <circle cx="64" cy="64" r="64" fill="#12131C"/>
-  <!-- First C -->
-  <path d="M 58,52 A 17,17 0 1,0 61,73" stroke="#FFFFFF" stroke-width="11" stroke-linecap="butt" fill="none"/>
-  <path d="M 61,73 A 17,17 0 0,0 58,76" stroke="#00D2FF" stroke-width="11" stroke-linecap="butt" fill="none"/>
-  <!-- Second C -->
-  <path d="M 94,52 A 17,17 0 1,0 97,73" stroke="#FFFFFF" stroke-width="11" stroke-linecap="butt" fill="none"/>
-  <path d="M 97,73 A 17,17 0 0,0 94,76" stroke="#00D2FF" stroke-width="11" stroke-linecap="butt" fill="none"/>
-</svg>

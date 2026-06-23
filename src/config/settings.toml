@@ -1,0 +1,88 @@
+# available directory themes:
+# spearmint, peppermint, hemingway, brookmint
+theme = 'brookmint'
+
+[general]
+title = "Local AI Tools"
+logo = ""
+iconLogo = "tabler:cpu"
+
+[general.seo]
+name = "Local AI Tools"
+description = "A curated directory of AI tools that run locally on your machine — no cloud, no subscriptions, complete privacy."
+url = "https://gemad.github.io"
+
+[directoryData.source]
+name = "md"
+
+[directoryData.tagPages]
+title = "{0} Tools"
+
+[directoryData.search]
+placeholder = "Search {0} local AI tools..."
+
+[[directoryData.tags]]
+key = "browser-extension"
+name = "Browser Extension"
+color = "green"
+emoji = "🧩"
+description = "Tools delivered as browser extensions that run processing locally inside your browser."
+
+[[directoryData.tags]]
+key = "translation"
+name = "Translation"
+color = "blue"
+emoji = "🌐"
+description = "Tools for translating text or speech between languages on-device."
+
+[[directoryData.tags]]
+key = "llm"
+name = "LLM"
+color = "purple"
+emoji = "🧠"
+description = "Large Language Model runners that execute entirely on your local hardware."
+
+[[directoryData.tags]]
+key = "speech-to-text"
+name = "Speech to Text"
+color = "green"
+emoji = "🎙️"
+description = "On-device transcription and speech recognition tools."
+
+[[directoryData.tags]]
+key = "image-generation"
+name = "Image Generation"
+color = "purple"
+emoji = "🎨"
+description = "Local diffusion-model image generators that need no cloud API."
+
+[[directoryData.tags]]
+key = "privacy"
+name = "Privacy-First"
+color = "green"
+emoji = "🔒"
+description = "Tools built with privacy as the primary design goal — zero data leaves your device."
+
+[header.banner]
+show = false
+text = "All tools run 100% locally — no cloud, no tracking."
+link = "https://github.com/gemad"
+brandText = "Local AI Tools"
+
+[header.navbar]
+colorModeSelector = false
+
+[[header.navbar.links]]
+name = "GitHub"
+href = "https://github.com/gemad"
+target = "_blank"
+
+[header.actionButton]
+text = "Submit a tool"
+href = "https://github.com/gemad"
+
+[footer]
+description = "A curated list of AI tools that respect your privacy by running entirely on your local machine."
+
+[footer.socials.github]
+link = "https://github.com/gemad"
