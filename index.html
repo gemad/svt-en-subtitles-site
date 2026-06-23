@@ -43,11 +43,15 @@
       <a href="#" class="logo">
         <div class="logo-icon">
           <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-            <circle cx="14" cy="14" r="14" fill="#12131C"/>
-            <path d="M 12.6,11.4 A 3.7,3.7 0 1,0 13.2,16.0" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="butt" fill="none"/>
-            <path d="M 13.2,16.0 A 3.7,3.7 0 0,0 12.6,16.6" stroke="#00D2FF" stroke-width="2.4" stroke-linecap="butt" fill="none"/>
-            <path d="M 20.6,11.4 A 3.7,3.7 0 1,0 21.2,16.0" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="butt" fill="none"/>
-            <path d="M 21.2,16.0 A 3.7,3.7 0 0,0 20.6,16.6" stroke="#00D2FF" stroke-width="2.4" stroke-linecap="butt" fill="none"/>
+            <circle cx="14" cy="14" r="14" fill="#12131C" />
+            <path d="M 12.6,11.4 A 3.7,3.7 0 1,0 13.2,16.0" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="butt"
+              fill="none" />
+            <path d="M 13.2,16.0 A 3.7,3.7 0 0,0 12.6,16.6" stroke="#00D2FF" stroke-width="2.4" stroke-linecap="butt"
+              fill="none" />
+            <path d="M 20.6,11.4 A 3.7,3.7 0 1,0 21.2,16.0" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="butt"
+              fill="none" />
+            <path d="M 21.2,16.0 A 3.7,3.7 0 0,0 20.6,16.6" stroke="#00D2FF" stroke-width="2.4" stroke-linecap="butt"
+              fill="none" />
           </svg>
         </div>
         SVT <span>English</span>
@@ -60,7 +64,8 @@
           <li><a href="#contact">Contact</a></li>
           <li>
             <a href="https://www.paypal.com/paypalme/geoemad" target="_blank" rel="noopener" class="btn-nav-coffee">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
                 <path d="M18 8h1a4 4 0 0 1 0 8h-1"></path>
                 <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path>
                 <line x1="6" y1="1" x2="6" y2="4"></line>
@@ -160,80 +165,20 @@
   </section>
 
 
-  <!-- Interactive Demo Section -->
+  <!-- Video Walkthrough Section -->
   <section id="demo" class="demo-section">
     <div class="container">
       <div class="section-header reveal">
-        <div class="section-tag">Live Preview</div>
-        <h2>See It in Action</h2>
-        <p>Interactive simulation of how subtitles appear while watching SVT Play.</p>
+        <div class="section-tag">Video Walkthrough</div>
+        <h2>See the Extension in Action</h2>
+        <p>Watch a short demonstration video showing real-time, on-device Swedish to English translation on SVT Play.</p>
       </div>
 
-      <div class="demo-wrapper reveal">
-        <!-- Browser Chrome -->
-        <div class="browser-chrome">
-          <div class="browser-dots">
-            <span class="dot red"></span>
-            <span class="dot yellow"></span>
-            <span class="dot green"></span>
-          </div>
-          <div class="browser-url">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="#64748b">
-              <path
-                d="M6 0a6 6 0 100 12A6 6 0 006 0zm.5 1.07A4.97 4.97 0 0110.95 5.5H8.43c-.08-1.4-.4-2.7-.93-3.7.32.08.64.18.95.3zm-.5-.07c-.7.84-1.26 2.2-1.4 3.5h2.8C7.26 3.2 6.7 1.84 6 1zm-4.95 4.5h2.52c.08-1.4.4-2.7.93-3.7-.32.08-.64.18-.95.3A4.97 4.97 0 001.05 5.5zM6 11c.7-.84 1.26-2.2 1.4-3.5H4.6c.14 1.3.7 2.66 1.4 3.5z" />
-            </svg>
-            <span>svtplay.se/video/rapport — Season 2026</span>
-          </div>
-          <div class="browser-controls">
-            <button class="demo-layout-btn" id="demoLayoutBtn">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="currentColor">
-                <path d="M1 2a1 1 0 011-1h10a1 1 0 011 1v10a1 1 0 01-1 1H2a1 1 0 01-1-1V2zm1 0v10h10V2H2z" />
-                <path d="M7 2v10M2 7h10" stroke="currentColor" stroke-width="1" fill="none" />
-              </svg>
-              Stacked
-            </button>
-          </div>
-        </div>
-
-        <!-- Video Area -->
-        <div class="demo-screen">
-          <div class="demo-video-bg"></div>
-
-          <!-- Simulated native Swedish sub -->
-          <div class="demo-native-sub" id="demoNativeSub">
-            Välkomna till kvällens sändning av Rapport.
-          </div>
-
-          <!-- Translation overlay -->
-          <div class="demo-overlay" id="demoOverlay">
-            <div class="demo-overlay-indicator">
-              <span class="demo-indicator-dot"></span>
-              SVT EN: Active
-            </div>
-            <div class="demo-overlay-sv" id="demoOverlaySv">Välkomna till kvällens sändning av Rapport.</div>
-            <div class="demo-overlay-en" id="demoOverlayEn">Welcome to tonight's broadcast of Rapport.</div>
-          </div>
-
-          <!-- Video Controls -->
-          <div class="demo-controls">
-            <div class="demo-ctrl-left">
-              <button class="demo-ctrl-btn" aria-label="Play">▶</button>
-              <span class="demo-time">12:34 / 28:00</span>
-            </div>
-            <div class="demo-progress">
-              <div class="demo-progress-track">
-                <div class="demo-progress-fill" id="demoProgressFill"></div>
-                <div class="demo-progress-handle" id="demoProgressHandle"></div>
-              </div>
-            </div>
-            <div class="demo-ctrl-right">
-              <div class="demo-en-badge">
-                <span class="demo-en-dot"></span>
-                🇬🇧 EN: ON
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="video-wrapper reveal">
+        <iframe src="https://www.youtube.com/embed/hI5f5V08wGA?rel=0&modestbranding=1"
+          title="SVT Play English Subtitles Demo Video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
     </div>
   </section>
@@ -252,12 +197,17 @@
       <div class="reveal" style="margin: 40px 0 20px;">
         <a href="https://chromewebstore.google.com/detail/svt-play-%E2%80%93-english-subtit/gmlibincdalncglkkneojolmpbbaehnf?hl=en"
           target="_blank" rel="noopener" class="cws-badge-link" style="display: inline-block;">
-          <img src="icons/chrome-webstore-badge.png" alt="Available in the Chrome Web Store" style="height: 64px; transition: transform 0.2s, filter 0.2s; filter: drop-shadow(0 4px 20px rgba(0, 255, 136, 0.15));" onmouseover="this.style.transform='scale(1.05)'; this.style.filter='drop-shadow(0 6px 24px rgba(0, 255, 136, 0.35))'" onmouseout="this.style.transform='scale(1)'; this.style.filter='drop-shadow(0 4px 20px rgba(0, 255, 136, 0.15))'">
+          <img src="icons/chrome-webstore-badge.png" alt="Available in the Chrome Web Store"
+            style="height: 64px; transition: transform 0.2s, filter 0.2s; filter: drop-shadow(0 4px 20px rgba(0, 255, 136, 0.15));"
+            onmouseover="this.style.transform='scale(1.05)'; this.style.filter='drop-shadow(0 6px 24px rgba(0, 255, 136, 0.35))'"
+            onmouseout="this.style.transform='scale(1)'; this.style.filter='drop-shadow(0 4px 20px rgba(0, 255, 136, 0.15))'">
         </a>
       </div>
 
-      <div class="reveal" style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 40px; line-height: 1.6;">
-        <p>Clicking the badge will take you to the official Chrome Web Store page where you can add the extension with a single click. You will receive automatic background updates whenever new features are added.</p>
+      <div class="reveal"
+        style="color: var(--text-secondary); max-width: 600px; margin: 0 auto 40px; line-height: 1.6;">
+        <p>Clicking the badge will take you to the official Chrome Web Store page where you can add the extension with a
+          single click. You will receive automatic background updates whenever new features are added.</p>
       </div>
     </div>
   </section>
@@ -472,11 +422,15 @@
       <div class="footer-left">
         <a href="#" class="footer-logo">
           <svg width="20" height="20" viewBox="0 0 28 28" fill="none">
-            <circle cx="14" cy="14" r="14" fill="#12131C"/>
-            <path d="M 12.6,11.4 A 3.7,3.7 0 1,0 13.2,16.0" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="butt" fill="none"/>
-            <path d="M 13.2,16.0 A 3.7,3.7 0 0,0 12.6,16.6" stroke="#00D2FF" stroke-width="2.4" stroke-linecap="butt" fill="none"/>
-            <path d="M 20.6,11.4 A 3.7,3.7 0 1,0 21.2,16.0" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="butt" fill="none"/>
-            <path d="M 21.2,16.0 A 3.7,3.7 0 0,0 20.6,16.6" stroke="#00D2FF" stroke-width="2.4" stroke-linecap="butt" fill="none"/>
+            <circle cx="14" cy="14" r="14" fill="#12131C" />
+            <path d="M 12.6,11.4 A 3.7,3.7 0 1,0 13.2,16.0" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="butt"
+              fill="none" />
+            <path d="M 13.2,16.0 A 3.7,3.7 0 0,0 12.6,16.6" stroke="#00D2FF" stroke-width="2.4" stroke-linecap="butt"
+              fill="none" />
+            <path d="M 20.6,11.4 A 3.7,3.7 0 1,0 21.2,16.0" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="butt"
+              fill="none" />
+            <path d="M 21.2,16.0 A 3.7,3.7 0 0,0 20.6,16.6" stroke="#00D2FF" stroke-width="2.4" stroke-linecap="butt"
+              fill="none" />
           </svg>
           SVT English
         </a>
@@ -659,67 +613,7 @@
     });
 
 
-    // =============================================
-    // INTERACTIVE DEMO: SUBTITLE CYCLING
-    // =============================================
-    const demoSubtitles = [
-      { sv: "Välkomna till kvällens sändning av Rapport.", en: "Welcome to tonight's broadcast of Rapport." },
-      { sv: "Vi har en viktig rapport angående det nya klimatmålet.", en: "We have an important report regarding the new climate goal." },
-      { sv: "Förhandlingarna har pågått hela natten i Bryssel.", en: "The negotiations have been ongoing all night in Brussels." },
-      { sv: "Beslutet förväntas bli officiellt under eftermiddagen.", en: "The decision is expected to become official in the afternoon." },
-      { sv: "Tack för att ni tittar, vi ses imorgon.", en: "Thank you for watching, we'll see you tomorrow." },
-    ];
 
-    let demoIndex = 0;
-    const demoNative = document.getElementById('demoNativeSub');
-    const demoSv = document.getElementById('demoOverlaySv');
-    const demoEn = document.getElementById('demoOverlayEn');
-    const demoOverlay = document.getElementById('demoOverlay');
-    const demoProgress = document.getElementById('demoProgressFill');
-    const demoHandle = document.getElementById('demoProgressHandle');
-    let demoPercent = 44;
-
-    function cycleDemoSubtitle() {
-      // Fade out
-      demoNative.style.opacity = '0';
-      demoOverlay.style.opacity = '0';
-      demoOverlay.style.transform = 'translateX(-50%) translateY(5px)';
-
-      setTimeout(() => {
-        demoIndex = (demoIndex + 1) % demoSubtitles.length;
-        const sub = demoSubtitles[demoIndex];
-        demoNative.textContent = sub.sv;
-        demoSv.textContent = sub.sv;
-        demoEn.textContent = sub.en;
-
-        // Advance progress
-        demoPercent = Math.min(demoPercent + 6, 92);
-        demoProgress.style.width = demoPercent + '%';
-        demoHandle.style.left = demoPercent + '%';
-
-        // Fade in
-        demoNative.style.opacity = '1';
-        demoOverlay.style.opacity = '1';
-        demoOverlay.style.transform = 'translateX(-50%) translateY(0)';
-      }, 400);
-    }
-
-    setInterval(cycleDemoSubtitle, 4500);
-
-    // Demo layout toggle
-    const demoLayoutBtn = document.getElementById('demoLayoutBtn');
-    let demoLayout = 'stacked';
-    demoLayoutBtn.addEventListener('click', () => {
-      if (demoLayout === 'stacked') {
-        demoLayout = 'side';
-        demoOverlay.classList.add('side-by-side');
-        demoLayoutBtn.textContent = '⇄ Side-by-Side';
-      } else {
-        demoLayout = 'stacked';
-        demoOverlay.classList.remove('side-by-side');
-        demoLayoutBtn.textContent = '⇅ Stacked';
-      }
-    });
 
 
     // =============================================
